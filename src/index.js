@@ -1,6 +1,16 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 
-import App from './components/App'
+import App from "./components/App";
+import basketReducer from "./reducers/basketReducer";
 
-ReactDOM.render(<App/>, document.querySelector('#root'))
+const store = createStore(basketReducer);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.querySelector("#root")
+);

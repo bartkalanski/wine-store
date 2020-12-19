@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div class="ui segment">
       <div class="ui secondary menu">
-        <h1 className="item red">Wine Store</h1>
+        <div className="ui large red header" style={{paddingTop: '15px'}}>Wine Store</div>
         <div className="right menu">
           <Link to="/" className="item">Store</Link>
           <Link to="/basket" className="item">Basket</Link>

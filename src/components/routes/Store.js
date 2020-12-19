@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Store = () => {
-    return <div>Store</div>
+    return <div className="ui container">Store</div>
 }
 
 export default Store
