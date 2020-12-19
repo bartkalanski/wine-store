@@ -1,13 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { addToCart } from '../../actions/cartActions'
 
 class Store extends Component {
+  handleClick(id) {
+   this.props.addToCart(id);
+  // console.log('handleClick', this.props)
+  }
   render() {
     const itemList = this.props.items.map((item) => {
       return (
         <div class="six wide column">
           <div class="ui card">
-            <img class="image" src={item.image} style={{height: '300px',width: '100px', alignSelf: 'center'}}/>
+            <img
+              class="image"
+              src={item.image}
+              style={{ height: "300px", width: "100px", alignSelf: "center" }}
+            />
             <div class="content">
               <div class="center aligned header">{item.title}</div>
               <div
@@ -22,15 +31,24 @@ class Store extends Component {
               </div>
             </div>
             <div class="left aligned extra content">{item.price}</div>
-            <button class="orange ui button">Add To Basket</button>
+            <button
+              onClick={() => this.handleClick(item.id)}
+              class="orange ui button"
+            >
+              Add To Basket
+            </button>
           </div>
         </div>
       );
     });
     return (
       <div className="ui container" style={{ padding: "20px" }}>
-        <div className="ui large header">Our Wines</div>
-        <div className="ui grid" style={{display: 'flex', justifyContent: 'center'}}>{itemList}</div>
+        <div
+          className="ui grid"
+          style={{ display: "flex", justifyContent: "center" }}
+        >
+          {itemList}
+        </div>
       </div>
     );
   }
@@ -42,4 +60,12 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Store);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (id) => {
+      dispatch(addToCart(id));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Store);
