@@ -7,7 +7,7 @@ class Store extends Component {
       return (
         <div class="six wide column">
           <div class="ui card">
-            <div class="image">Image</div>
+            <img class="image" src={item.image} style={{height: '300px',width: '100px', alignSelf: 'center'}}/>
             <div class="content">
               <div class="center aligned header">{item.title}</div>
               <div
