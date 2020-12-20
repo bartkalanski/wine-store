@@ -2,7 +2,7 @@ import imageOne from '../imgs/porta6.jpg'
 import imageTwo from '../imgs/CNDP.png'
 import imageThree from '../imgs/riesling.jpg'
 import imageFour from '../imgs/rioja.jpg'
-import { ADD_TO_CART } from '../actions/action-types/cart-actions'
+import { ADD_TO_BASKET } from '../actions/action-types/cart-actions'
 
 const initState = {
     items:[
@@ -16,7 +16,7 @@ const initState = {
 }
 
 const basketReducer = (state = initState, action ) => {
-    if(action.type === ADD_TO_CART){
+    if(action.type === ADD_TO_BASKET){
         // Check if selected wine matches Wines in state
        const addItem = state.items.find(item => item.id === action.id)
        // check if action id exists in itemsInBasket

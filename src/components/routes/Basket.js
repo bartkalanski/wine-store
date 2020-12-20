@@ -1,49 +1,53 @@
 import React from "react";
 import { connect } from "react-redux";
 
-class Basket extends React.Component {
+import "./Basket.css";
 
+class Basket extends React.Component {
   render() {
-     if(this.props.items.length){
-         return this.props.items.map(item => {
-             return(
-                <div class="ui card">
-                <img
-                  class="image"
-                  src={item.image}
-                  style={{ height: "300px", width: "100px", alignSelf: "center" }}
-                />
-                <div class="content">
-                  <div class="center aligned header">{item.title}</div>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <div class="description">{item.type}</div>
-                    <div class="description">{item.origin}</div>
-                  </div>
-                </div>
-                <div class="left aligned extra content">{item.price}</div>
-                <div class="left aligned extra content">{item.quantity}</div>
-                <button
-                  onClick={() => this.handleClick(item.id)}
-                  class="orange ui button"
-                >
-                  Add To Basket
-                </button>
-              </div>
-             )
-         })
-     }
-     return <div>No</div>
+    const basketList = this.props.items.map((item) => {
+      return (
+        <React.Fragment>
+        <div className="basket__holder">
+          <div className="basket__img">
+            <img src={item.image} alt={item.title} style={{ height: "150px", width: "50px" }} />
+          </div>
+          <div className="basket__data">
+            <div className="basket__name">Name: {item.title}</div>
+            <div className="basket__origin">
+              Country of Origin: {item.origin}
+            </div>
+            <div className="basket__price">Price: £ {item.price}</div>
+            <div className="basket__quantity">Quantity: {item.quantity}</div>
+          </div>
+          </div>
+        </React.Fragment>
+      );
+    });
+
+    if (this.props.items.length) {
+      return (
+        <div className="ui container" style={{ padding: "20px" }}>
+          <div className="basket__container">{basketList}</div>
+          <div className="total__container">
+            <div className="total__price">Total to pay: £{this.props.total}</div>
+
+            <button className="ui orange button total__btn">Proceed to checkout</button>
+          </div>
+        </div>
+      );
+    }
+    return (
+      <div className="ui container">
+        <div className="ui center aligned header">You basket is empty</div>
+      </div>
+    );
   }
 }
 const mapStateToProps = (state) => {
   return {
-    items: state.itemsInBasket
+    items: state.itemsInBasket,
+    total: state.total
   };
 };
 

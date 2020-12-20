@@ -1,8 +1,8 @@
-import { ADD_TO_CART } from './action-types/cart-actions'
+import { ADD_TO_BASKET } from './action-types/cart-actions'
 
-export const addToCart = (id) =>{
+export const addToBasket = (id) =>{
     return {
-        type: ADD_TO_CART,
+        type: ADD_TO_BASKET,
         id
     }
 }

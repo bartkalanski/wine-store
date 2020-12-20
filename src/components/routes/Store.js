@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addToCart } from '../../actions/cartActions'
+import { addToBasket } from '../../actions/cartActions'
 
 class Store extends Component {
   handleClick(id) {
-   this.props.addToCart(id);
-  // console.log('handleClick', this.props)
+   this.props.addToBasket(id);
+
   }
   render() {
     const itemList = this.props.items.map((item) => {
@@ -15,6 +15,7 @@ class Store extends Component {
             <img
               class="image"
               src={item.image}
+              alt={item.title}
               style={{ height: "300px", width: "100px", alignSelf: "center" }}
             />
             <div class="content">
@@ -62,8 +63,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addToCart: (id) => {
-      dispatch(addToCart(id));
+    addToBasket: (id) => {
+      dispatch(addToBasket(id));
     },
   };
 };
