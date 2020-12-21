@@ -8,18 +8,22 @@ class Basket extends React.Component {
     const basketList = this.props.items.map((item) => {
       return (
         <React.Fragment>
-        <div className="basket__holder">
-          <div className="basket__img">
-            <img src={item.image} alt={item.title} style={{ height: "150px", width: "50px" }} />
-          </div>
-          <div className="basket__data">
-            <div className="basket__name">Name: {item.title}</div>
-            <div className="basket__origin">
-              Country of Origin: {item.origin}
+          <div className="basket__holder">
+            <div className="basket__img">
+              <img
+                className="basket__img-img"
+                src={item.image}
+                alt={item.title}
+              />
             </div>
-            <div className="basket__price">Price: £ {item.price}</div>
-            <div className="basket__quantity">Quantity: {item.quantity}</div>
-          </div>
+            <div className="basket__data">
+              <div className="basket__name">Name: {item.title}</div>
+              <div className="basket__origin">
+                Country of Origin: {item.origin}
+              </div>
+              <div className="basket__price">Price: £ {item.price}</div>
+              <div className="basket__quantity">Quantity: {item.quantity}</div>
+            </div>
           </div>
         </React.Fragment>
       );
@@ -27,12 +31,16 @@ class Basket extends React.Component {
 
     if (this.props.items.length) {
       return (
-        <div className="ui container" style={{ padding: "20px" }}>
+        <div className="ui container basket__padding" >
           <div className="basket__container">{basketList}</div>
           <div className="total__container">
-            <div className="total__price">Total to pay: £{this.props.total}</div>
+            <div className="total__price">
+              Total to pay: £{this.props.total}
+            </div>
 
-            <button className="ui orange button total__btn">Proceed to checkout</button>
+            <button className="ui orange button total__btn">
+              Proceed to checkout
+            </button>
           </div>
         </div>
       );
@@ -47,7 +55,7 @@ class Basket extends React.Component {
 const mapStateToProps = (state) => {
   return {
     items: state.itemsInBasket,
-    total: state.total
+    total: state.total,
   };
 };
 

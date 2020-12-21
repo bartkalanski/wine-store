@@ -1,0 +1,17 @@
+.ui.card>.image, .ui.cards>.card>.image {
+  height: 300px;
+  width: 100px;
+  align-self: center;
+}
+.description{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.ui.container{
+    padding: 20px;
+}
+.ui.grid{
+    display: flex;
+    justify-content: center;
+}

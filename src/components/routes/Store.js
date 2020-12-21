@@ -1,32 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addToBasket } from '../../actions/cartActions'
+
+import { addToBasket } from "../../actions/cartActions";
+import "./Store.css";
 
 class Store extends Component {
   handleClick(id) {
-   this.props.addToBasket(id);
-
+    this.props.addToBasket(id);
   }
   render() {
     const itemList = this.props.items.map((item) => {
       return (
         <div class="six wide column">
           <div class="ui card">
-            <img
-              class="image"
-              src={item.image}
-              alt={item.title}
-              style={{ height: "300px", width: "100px", alignSelf: "center" }}
-            />
+            <img class="image" src={item.image} alt={item.title} />
             <div class="content">
               <div class="center aligned header">{item.title}</div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
+              <div className="description">
                 <div class="description">{item.type}</div>
                 <div class="description">{item.origin}</div>
               </div>
@@ -43,13 +33,8 @@ class Store extends Component {
       );
     });
     return (
-      <div className="ui container" style={{ padding: "20px" }}>
-        <div
-          className="ui grid"
-          style={{ display: "flex", justifyContent: "center" }}
-        >
-          {itemList}
-        </div>
+      <div className="ui container">
+        <div className="ui grid">{itemList}</div>
       </div>
     );
   }
