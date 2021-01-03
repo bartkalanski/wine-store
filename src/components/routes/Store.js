@@ -6,7 +6,7 @@ import "./Store.css";
 
 class Store extends Component {
   handleClick(id) {
-    this.props.addToBasket(id);
+    this.props.addToBasketDispatch(id);
   }
   render() {
     const itemList = this.props.items.map((item) => {
@@ -48,7 +48,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addToBasket: (id) => {
+    addToBasketDispatch: (id) => {
       dispatch(addToBasket(id));
     },
   };

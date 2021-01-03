@@ -18,24 +18,24 @@ const initState = {
 const basketReducer = (state = initState, action ) => {
     if(action.type === ADD_TO_BASKET){
         // Check if selected wine matches Wines in state
-       const addItem = state.items.filter(item => item.id === action.id)
+       const addItem = state.items.find(item => item.id === action.id)
        // check if action id exists in itemsInBasket
        const basketIsNotEmpty = state.itemsInBasket.find(item => action.id === item.id)
        
        if(basketIsNotEmpty){
-           addItem[0].quantity++
+           addItem.quantity++
            return {
                ...state,
-                total: parseInt(state.total) + parseInt(addItem[0].price)
+                total: parseFloat(state.total) + parseFloat(addItem.price)
            }
        }
        else{
     
-           addItem[0].quantity = 1
+           addItem.quantity = 1
            return {
                ...state,
-               itemsInBasket: [...state.itemsInBasket, addItem[0]],
-               total: parseInt(state.total) + parseInt(addItem[0].price)
+               itemsInBasket: [...state.itemsInBasket, addItem],
+               total: parseFloat(state.total) + parseFloat(addItem.price)
            }
        }
        
