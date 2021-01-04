@@ -1,5 +1,7 @@
 import React from 'react'
 
+import getImageFromJson from "../helper-functions/getImageFromJson";
+
 const BasketList = ({ items }) => {
     return items.map((item) => {
         return (
@@ -8,7 +10,7 @@ const BasketList = ({ items }) => {
               <div className="basket__img">
                 <img
                   className="basket__img-img"
-                  src={item.image}
+                  src={getImageFromJson(item.image)}
                   alt={item.title}
                 />
               </div>

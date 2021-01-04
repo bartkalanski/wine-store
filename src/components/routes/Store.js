@@ -1,25 +1,18 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 
 import "./Store.css";
 import StoreList from "./StoreList";
 
-class Store extends Component {
-  render() {
-    return (
-      <div className="ui container">
-        <div className="ui grid">
-          <StoreList items={this.props.items} />
-        </div>
+const Store = () => {
+  const items = useSelector((state) => state.items);
+  return (
+    <div className="ui container">
+      <div className="ui grid">
+        <StoreList items={items} />
       </div>
-    );
-  }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    items: state.items,
-  };
+    </div>
+  );
 };
 
-export default connect(mapStateToProps)(Store);
+export default Store;
