@@ -4,7 +4,8 @@ import { ADD_TO_BASKET } from '../actions/action-types/cart-actions'
 const initState = {
     items: products.items,
     itemsInBasket: [],
-    total: 0
+    total: 0,
+    quantity: 0
 }
 
 const basketReducer = (state = initState, action ) => {
@@ -18,7 +19,8 @@ const basketReducer = (state = initState, action ) => {
            addItem.quantity++
            return {
                ...state,
-                total: parseFloat(state.total) + parseFloat(addItem.price)
+                total: parseFloat(state.total) + parseFloat(addItem.price),
+                quantity: state.quantity + 1
            }
        }
        else{
@@ -27,7 +29,8 @@ const basketReducer = (state = initState, action ) => {
            return {
                ...state,
                itemsInBasket: [...state.itemsInBasket, addItem],
-               total: parseFloat(state.total) + parseFloat(addItem.price)
+               total: parseFloat(state.total) + parseFloat(addItem.price),
+               quantity: state.quantity + 1
            }
        }
        
