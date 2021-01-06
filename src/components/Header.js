@@ -6,7 +6,7 @@ import './Header.css'
 
 const Header = () => {
 
-  const basketQuantity = useSelector((state)=>state.quantity)
+  const basketQuantity = useSelector((state)=>state.basketQuantity)
   return (
     <div class="ui segment">
       <div class="ui secondary menu">

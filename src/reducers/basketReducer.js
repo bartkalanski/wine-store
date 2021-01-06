@@ -10,25 +10,29 @@ const initState = {
 
 const basketReducer = (state = initState, action) => {
   if (action.type === ADD_TO_BASKET) {
-    // Check if selected wine matches wines in state
-    const addItem = { ...state.items.find((item) => action.id === item.id) };
-    // Check if selected wine is in the basket
-    const wineIsInBasket = state.itemsInBasket.find(
-      (item) => action.id === item.id
-    );
-    if (wineIsInBasket) {
-      addItem.quantity++;
+    // Find product in Basket
+    let product = state.itemsInBasket.find((item) => action.id === item.id);
+    let alreadyInBasket = true;
+
+    if (!product) {
+      product = {
+        ...state.items.find((item) => item.id === action.id),
+      };
+      alreadyInBasket = false;
+    }
+    if (alreadyInBasket) {
+      product.quantity++;
       return {
         ...state,
-        total: parseFloat(state.total) + parseFloat(addItem.price),
+        total: parseFloat(state.total) + parseFloat(product.price),
         basketQuantity: state.basketQuantity + 1,
       };
     } else {
-      addItem.quantity = 1;
+      product.quantity = 1;
       return {
         ...state,
-        itemsInBasket: [...state.itemsInBasket, addItem],
-        total: parseFloat(state.total) + parseFloat(addItem.price),
+        itemsInBasket: [...state.itemsInBasket, product],
+        total: parseFloat(state.total) + parseFloat(product.price),
         basketQuantity: state.basketQuantity + 1,
       };
     }
