@@ -3,18 +3,18 @@ import { shallow } from "enzyme";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 
-import Basket from "../components/routes/Basket";
+import StoreList from "../components/routes/StoreList";
 import basketReducer from "../reducers/basketReducer";
 
 const store = createStore(basketReducer);
 
-describe("Basket", () => {
+describe("StoreList", () => {
   let wrapper;
 
   beforeEach(() => {
     wrapper = shallow(
       <Provider store={store}>
-        <Basket />
+        <StoreList />
       </Provider>
     );
   });

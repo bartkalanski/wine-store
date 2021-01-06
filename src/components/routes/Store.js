@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector } from "../helper-functions/react-redux-hooks";
 
 import "./Store.css";
 import StoreList from "./StoreList";
