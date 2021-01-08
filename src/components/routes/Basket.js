@@ -3,19 +3,21 @@ import { useSelector } from "react-redux";
 
 import "./Basket.css";
 import BasketList from "./BasketList";
+import formatPrice from "../helper-functions/formatPrice";
 
 const Basket = () => {
   const items = useSelector((state) => state.itemsInBasket);
   const total = useSelector((state) => state.total);
-  const formatPrice = (totalPrice) => {
-    const formatTotalPrice = {
-      style: "currency",
-      currency: "GBP",
-    };
-    return totalPrice.toLocaleString("en-GB", formatTotalPrice);
-  };
 
-  if (items.length) {
+  if (items === undefined || items.length === 0) {
+    return (
+      <div className="ui container">
+        <div className="ui center aligned header">Your basket is empty</div>
+      </div>
+    );
+  } else {
+    //console.log('items', items)
+    // console.log('items.length', items.length)
     return (
       <div className="ui container basket__padding">
         <div className="basket__container">
@@ -31,11 +33,6 @@ const Basket = () => {
       </div>
     );
   }
-  return (
-    <div className="ui container">
-      <div className="ui center aligned header">You basket is empty</div>
-    </div>
-  );
 };
 
 export default Basket;
