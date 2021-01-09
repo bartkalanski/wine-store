@@ -41,11 +41,15 @@ const basketReducer = (state = initState, action) => {
     }
   }
   if (action.type === REMOVE_FROM_BASKET) {
+    let product = state.itemsInBasket.find((item)=>action.id === item.id)
+    let findProduct = state.itemsInBasket.indexOf(product)
     return {
       ...state,
       itemsInBasket: state.itemsInBasket.filter(
-        (item, index) => index !== action.id
+     (item, index) => index !== findProduct
       ),
+      basketQuantity: state.basketQuantity - product.quantity
+
     };
   }
   return state;
