@@ -1,8 +1,11 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 
 import getImageFromJson from "../helper-functions/getImageFromJson";
+import { removeFromBasket } from "../../actions/cartActions";
 
 const BasketList = ({ items }) => {
+  const dispatch = useDispatch()
     return items.map((item) => {
         return (
           <React.Fragment>
@@ -21,6 +24,7 @@ const BasketList = ({ items }) => {
                 </div>
                 <div className="basket__price">Price: £ {item.price}</div>
                 <div className="basket__quantity">Quantity: {item.quantity}</div>
+                <button className="ui negative basic button"  onClick={() => dispatch(removeFromBasket(item.id))}>Remove</button>
               </div>
             </div>
           </React.Fragment>
