@@ -1,34 +1,51 @@
 import React from "react";
-import { shallow } from "enzyme";
-
-import * as reactRedux from "react-redux";
+import Enzyme, { mount } from "enzyme";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 import Header from "../components/Header";
-import { Link } from "react-router-dom";
+import reducer from "../reducers/basketReducer";
 
-describe("Header", () => {
-  const useSelectorMock = jest.spyOn(reactRedux, "useSelector");
-  let wrapper;
-
-  beforeEach(() => {
-    useSelectorMock.mockClear();
-    wrapper = shallow(<Header />);
-  });
+describe("Header component - something in the basket", () => {
+  const mockStore = createStore(reducer, { basketQuantity: 1 });
+  const getWrapper = () =>
+    mount(
+      <Provider store={mockStore}>
+        <Router>
+          <Header />
+        </Router>
+      </Provider>
+    );
   it("should render without throwing an error", () => {
+    const wrapper = getWrapper();
     expect(wrapper).not.toBeNull();
   });
   it("should render Basket Link tag", () => {
-    expect(
-      wrapper.containsMatchingElement(<Link to="/basket">Basket</Link>)
-    ).toEqual(true);
+    const wrapper = getWrapper();
+    expect(wrapper.containsMatchingElement(<Link to="/">Store</Link>)).toEqual(
+      true
+    );
   });
-  it("should not render any numbers over basket if no items in the basket are available", () => {
-    const basket = wrapper.find(".shopping__basket-items");
-    expect(basket.text()).toBe("");
+  it("should render the quantity of products in the basket", () => {
+    const wrapper = getWrapper();
+    expect(wrapper.find(".shopping__basket-items").text()).toEqual("1");
   });
-  it("should render number of items in the basket", () => {
-    useSelectorMock.mockReturnValue({ basketQuantity: 2 })
-    const basket = wrapper.find(".shopping__basket-items");
-    expect(basket.text()).toBe(1);
+ 
+});
+describe("Header component - empty basket", () => {
+  const mockStore = createStore(reducer, { basketQuantity: 0 });
+  const getWrapper = () =>
+    mount(
+      <Provider store={mockStore}>
+        <Router>
+          <Header />
+        </Router>
+      </Provider>
+    );
+
+  it("should render nothing if basket is empty", () => {
+    const wrapper = getWrapper();
+    expect(wrapper.find(".shopping__basket-items").text()).toEqual("");
   });
 });

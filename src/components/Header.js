@@ -8,8 +8,8 @@ const Header = () => {
 
   const basketQuantity = useSelector((state)=>state.basketQuantity)
   return (
-    <div class="ui segment">
-      <div class="ui secondary menu">
+    <div className="ui segment">
+      <div className="ui secondary menu">
         <div className="ui container">
         <div className="ui large red header" style={{paddingTop: '15px'}}>Wine Store</div>
         <div className="right menu">

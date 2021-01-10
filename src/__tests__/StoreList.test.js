@@ -1,14 +1,43 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { mount } from "enzyme";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 
 import StoreList from "../components/routes/StoreList";
 import basketReducer from "../reducers/basketReducer";
+import products from "../products/products.json";
 
-const store = createStore(basketReducer);
+describe("StoreList component - something in the basket", () => {
+  const state = {
+    items: [
+      {
+        id: 1,
+        title: "Châteauneuf du Pape",
+        type: "Red",
+        origin: "France",
+        price: "27.99",
+        image: "imageTwo",
+      },
+    ],
+  };
+  const mockStore = createStore(basketReducer, state);
+  const getWrapper = () =>
+    mount(
+      <Provider store={mockStore}>
+        <StoreList />
+      </Provider>
+    );
+  xit("should dispatch the correct action on button click", () => {
+    mockStore.dispatch = jest.fn();
+
+    const wrapper = getWrapper(mockStore);
+    wrapper.find(".orange.ui.button").simulate("click");
+    expect(mockStore.dispatch).toHaveBeenCalledWith();
+  });
+});
 
 describe("StoreList", () => {
+  const store = createStore(basketReducer);
   let wrapper;
 
   const props = {
@@ -43,6 +72,8 @@ describe("StoreList", () => {
     expect(card).toHaveLength(1);
   });
   it("should contain a button", () => {
-    expect(wrapper.containsMatchingElement(<button>Add To Basket</button>)).toEqual(true);
+    expect(
+      wrapper.containsMatchingElement(<button>Add To Basket</button>)
+    ).toEqual(true);
   });
 });
