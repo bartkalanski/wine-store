@@ -1,33 +1,41 @@
 import React from "react";
-import * as reactRedux from 'react-redux'
-import { shallow } from "enzyme";
-
+import { mount } from "enzyme";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 
 import BasketList from "../components/routes/BasketList";
+import basketReducer from "../reducers/basketReducer";
 
 describe("BasketList", () => {
-  let wrapper;
-  const useDispatchMock = jest.spyOn(reactRedux, 'useDispatch')
+  const state = {
+    items: [
+      {
+        id: 1,
+        title: "Châteauneuf du Pape",
+        type: "Red",
+        origin: "France",
+        price: "27.99",
+        image: "imageTwo",
+      },
+    ],
+  };
+  const mockStore = createStore(basketReducer, state);
+  const getWrapper = () =>
+    mount(
+      <Provider store={mockStore}>
+        <BasketList {...state} />
+      </Provider>
+    );
+    it("should render without throwing an error", () => {
+      const wrapper = getWrapper(mockStore);
+      expect(wrapper).not.toBeNull();
+    });
+  it("should dispatch the correct action on button click", () => {
+    mockStore.dispatch = jest.fn();
 
-  const item = [
-    {
-      image: "image",
-      title: "title",
-      origin: "origin",
-      price: "0.00",
-    },
-  ];
-
-  beforeEach(() => {
-    wrapper = shallow(<BasketList items={item} />);
-    useDispatchMock.mockClear()
+    const wrapper = getWrapper(mockStore);
+    wrapper.find(".ui.negative.basic.button").simulate("click");
+    expect(mockStore.dispatch).toHaveBeenCalled();
   });
-  it("should render without throwing an error", () => {
-    expect(wrapper).not.toBeNull();
-  });
-  it("should fire useDispatch hook", () => {
-    const dummyDispatch = jest.fn()
-    useDispatchMock.mockReturnValue(dummyDispatch)
-    expect(dummyDispatch).not.toHaveBeenCalled()
-  })
+  
 });

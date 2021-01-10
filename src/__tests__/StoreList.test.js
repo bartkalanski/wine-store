@@ -5,9 +5,9 @@ import { createStore } from "redux";
 
 import StoreList from "../components/routes/StoreList";
 import basketReducer from "../reducers/basketReducer";
-import products from "../products/products.json";
 
-describe("StoreList component - something in the basket", () => {
+
+describe("StoreList component - unit test for useSelector and useDispatch", () => {
   const state = {
     items: [
       {
@@ -24,19 +24,19 @@ describe("StoreList component - something in the basket", () => {
   const getWrapper = () =>
     mount(
       <Provider store={mockStore}>
-        <StoreList />
+        <StoreList {...state}/>
       </Provider>
     );
-  xit("should dispatch the correct action on button click", () => {
+  it("should dispatch the correct action on button click", () => {
     mockStore.dispatch = jest.fn();
 
     const wrapper = getWrapper(mockStore);
     wrapper.find(".orange.ui.button").simulate("click");
-    expect(mockStore.dispatch).toHaveBeenCalledWith();
+    expect(mockStore.dispatch).toHaveBeenCalled()
   });
 });
 
-describe("StoreList", () => {
+describe("StoreList - general unit tests", () => {
   const store = createStore(basketReducer);
   let wrapper;
 

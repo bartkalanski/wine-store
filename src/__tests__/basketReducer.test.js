@@ -1,43 +1,11 @@
 import basketReducer from "../reducers/basketReducer";
-import products from '../products/products.json'
+import products from "../products/products.json";
+import { ADD_TO_BASKET, REMOVE_FROM_BASKET } from "../actions/cartActions";
 
 describe("basketReducer", () => {
   let initState = {
     basketQuantity: 0,
-    items: [
-      {
-        id: 1,
-        image: "imageTwo",
-        origin: "France",
-        price: "27.99",
-        title: "Châteauneuf du Pape",
-        type: "Red",
-      },
-      {
-        id: 2,
-        image: "imageOne",
-        origin: "Portugal",
-        price: "7.99",
-        title: "Porta 6",
-        type: "Red",
-      },
-      {
-        id: 3,
-        image: "imageFour",
-        origin: "Spain",
-        price: "14.99",
-        title: "Rioja",
-        type: "Red",
-      },
-      {
-        id: 4,
-        image: "imageThree",
-        origin: "Germany",
-        price: "9.99",
-        title: "Riesling",
-        type: "White",
-      },
-    ],
+    items: products.items,
     itemsInBasket: [],
     total: 0,
   };
@@ -54,13 +22,22 @@ describe("basketReducer", () => {
     expect(basketReducer(undefined, { type: "ADD_TO_BASKET" })).toEqual(state);
   });
   xit("can handle REMOVE_FROM_BASKET", () => {
-    let state = {
-      ...initState,
-      itemsInBasket: [products.items[0]],
-      basketQuantity: 1,
-    };
-    expect(basketReducer(undefined, { type: "REMOVE_FROM_BASKET" })).toEqual(
-      state
-    );
+    let itemsInBaske = [
+      {
+        ...products.items[0],
+        quantity: 1,
+      },
+    ];
+    expect(
+      basketReducer(
+        {
+          basketQuantity: 1,
+          itemsInBasket: [...itemsInBaske],
+          quantity: 1,
+          total: "27.99",
+        },
+        { type: REMOVE_FROM_BASKET, id: 1 }
+      )
+    ).toEqual();
   });
 });

@@ -9,7 +9,8 @@ describe("date", () => {
   });
   it("should return file name of imageThree", () => {
     expect(getImageFromJson("imageThree")).toBe("riesling.jpg");
-  });it("should return file name of imageFour", () => {
+  });
+  it("should return file name of imageFour", () => {
     expect(getImageFromJson("imageFour")).toBe("rioja.jpg");
   });
 });
