@@ -1,5 +1,8 @@
 import products from "../products/products.json";
-import { ADD_TO_BASKET } from "../actions/action-types/cart-actions";
+import {
+  ADD_TO_BASKET,
+  REMOVE_FROM_BASKET,
+} from "../actions/action-types/cart-actions";
 
 const initState = {
   items: products.items,
@@ -36,6 +39,18 @@ const basketReducer = (state = initState, action) => {
         basketQuantity: state.basketQuantity + 1,
       };
     }
+  }
+  if (action.type === REMOVE_FROM_BASKET) {
+    let product = state.itemsInBasket.find((item)=>action.id === item.id)
+    let findProduct = state.itemsInBasket.indexOf(product)
+    return {
+      ...state,
+      itemsInBasket: state.itemsInBasket.filter(
+     (item, index) => index !== findProduct
+      ),
+      basketQuantity: state.basketQuantity - product.quantity
+
+    };
   }
   return state;
 };
