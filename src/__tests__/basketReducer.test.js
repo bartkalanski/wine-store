@@ -35,7 +35,7 @@ describe("basketReducer", () => {
       basketReducer(basketState, { type: "REMOVE_FROM_BASKET", id: 1 })
     ).toEqual({ ...initState,items: products.items,
       itemsInBasket: [{ ...products.items[1], quantity: 1 }],
-      total: "£7.99",
+      total: 7.989999999999998,
       basketQuantity: 1, });
   });
 });

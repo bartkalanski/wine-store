@@ -50,7 +50,7 @@ const basketReducer = (state = initState, action) => {
       itemsInBasket: state.itemsInBasket.filter(
         (item, index) => index !== findProduct
       ),
-      total: formatPrice(state.total - product.price),
+      total: state.total - product.price,
       basketQuantity: state.basketQuantity - product.quantity,
     };
   }
