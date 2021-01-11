@@ -1,7 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import getImageFromJson from "../helper-functions/getImageFromJson";
 
+import getImageFromJson from "../helper-functions/getImageFromJson";
+import formatPrice from '../helper-functions/formatPrice'
 import { addToBasket } from "../../actions/cartActions";
 
 const StoreList = ({ items }) => {
@@ -23,7 +24,7 @@ const StoreList = ({ items }) => {
               <div className="description">{item.origin}</div>
             </div>
           </div>
-          <div className="left aligned extra content">{item.price}</div>
+          <div className="left aligned extra content">{formatPrice(Number(item.price))}</div>
           <button
             onClick={() => dispatch(addToBasket(item.id))}
             className="orange ui button"

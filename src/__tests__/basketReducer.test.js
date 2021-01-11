@@ -4,10 +4,10 @@ import { ADD_TO_BASKET, REMOVE_FROM_BASKET } from "../actions/cartActions";
 
 describe("basketReducer", () => {
   let initState = {
-    basketQuantity: 0,
     items: products.items,
     itemsInBasket: [],
     total: 0,
+    basketQuantity: 0,
   };
   it("has a default state", () => {
     expect(basketReducer(undefined, { type: "unexpected" })).toEqual(initState);
@@ -21,23 +21,21 @@ describe("basketReducer", () => {
     };
     expect(basketReducer(undefined, { type: "ADD_TO_BASKET" })).toEqual(state);
   });
-  xit("can handle REMOVE_FROM_BASKET", () => {
-    let itemsInBaske = [
-      {
-        ...products.items[0],
-        quantity: 1,
-      },
-    ];
+  it("can handle REMOVE_FROM_BASKET", () => {
+    let basketState = {
+      ...initState,
+      itemsInBasket: [
+        { ...products.items[1], quantity: 1 },
+        { ...products.items[0], quantity: 1 },
+      ],
+      total: 35.98,
+      basketQuantity: 2,
+    };
     expect(
-      basketReducer(
-        {
-          basketQuantity: 1,
-          itemsInBasket: [...itemsInBaske],
-          quantity: 1,
-          total: "27.99",
-        },
-        { type: REMOVE_FROM_BASKET, id: 1 }
-      )
-    ).toEqual();
+      basketReducer(basketState, { type: "REMOVE_FROM_BASKET", id: 1 })
+    ).toEqual({ ...initState,items: products.items,
+      itemsInBasket: [{ ...products.items[1], quantity: 1 }],
+      total: "£7.99",
+      basketQuantity: 1, });
   });
 });
