@@ -3,6 +3,7 @@ import {
   ADD_TO_BASKET,
   REMOVE_FROM_BASKET,
 } from "../actions/action-types/cart-actions";
+import formatPrice from '../components/helper-functions/formatPrice'
 
 const initState = {
   items: products.items,
@@ -41,15 +42,16 @@ const basketReducer = (state = initState, action) => {
     }
   }
   if (action.type === REMOVE_FROM_BASKET) {
-    let product = state.itemsInBasket.find((item)=>action.id === item.id)
-    let findProduct = state.itemsInBasket.indexOf(product)
+    let product = state.itemsInBasket.find((item) => action.id === item.id);
+    let findProduct = state.itemsInBasket.indexOf(product);
+    
     return {
       ...state,
       itemsInBasket: state.itemsInBasket.filter(
-     (item, index) => index !== findProduct
+        (item, index) => index !== findProduct
       ),
-      basketQuantity: state.basketQuantity - product.quantity
-
+      total: formatPrice(state.total - product.price),
+      basketQuantity: state.basketQuantity - product.quantity,
     };
   }
   return state;

@@ -16,8 +16,6 @@ const Basket = () => {
       </div>
     );
   } else {
-    //console.log('items', items)
-    // console.log('items.length', items.length)
     return (
       <div className="ui container basket__padding">
         <div className="basket__container">
