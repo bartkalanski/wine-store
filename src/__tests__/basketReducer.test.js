@@ -13,13 +13,32 @@ describe("basketReducer", () => {
     expect(basketReducer(undefined, { type: "unexpected" })).toEqual(initState);
   });
   it("can handle ADD_TO_BASKET", () => {
-    let state = {
-      basketQuantity: 1,
+    let basketState = {
       items: initState.items,
-      itemsInBasket: [{ quantity: 1 }],
-      total: NaN,
+      itemsInBasket: [{ ...products.items[0], quantity: 1 }],
+      basketQuantity: 1,
+      total: 27.99,
     };
-    expect(basketReducer(undefined, { type: "ADD_TO_BASKET" })).toEqual(state);
+    expect(basketReducer(initState, { type: "ADD_TO_BASKET", id: 1 })).toEqual(
+      basketState
+    );
+  });
+  it("can handle ADD_TO_BASKET if item is already in the basket", () => {
+    let basketState = {
+      items: initState.items,
+      itemsInBasket: [{ ...products.items[0], quantity: 2 }],
+      basketQuantity: 1,
+      total: 27.99,
+    };
+    expect(
+      basketReducer(
+        {
+          ...initState,
+          itemsInBasket: [{ ...products.items[0], quantity: 1 }],
+        },
+        { type: "ADD_TO_BASKET", id: 1 }
+      )
+    ).toEqual(basketState);
   });
   it("can handle REMOVE_FROM_BASKET", () => {
     let basketState = {
@@ -33,9 +52,12 @@ describe("basketReducer", () => {
     };
     expect(
       basketReducer(basketState, { type: "REMOVE_FROM_BASKET", id: 1 })
-    ).toEqual({ ...initState,items: products.items,
+    ).toEqual({
+      ...initState,
+      items: products.items,
       itemsInBasket: [{ ...products.items[1], quantity: 1 }],
       total: 7.989999999999998,
-      basketQuantity: 1, });
+      basketQuantity: 1,
+    });
   });
 });

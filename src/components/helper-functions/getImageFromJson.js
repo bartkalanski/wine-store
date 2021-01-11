@@ -10,7 +10,7 @@ const getImageFromJson = (image) => {
     return imageTwo;
   } else if (image === "imageThree") {
     return imageThree;
-  } else if (image === "imageFour") {
+  } else {
     return imageFour;
   }
 };
