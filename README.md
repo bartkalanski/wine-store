@@ -14,7 +14,7 @@ Wine Store is an attempt to build a basic E-commerce website, the focus here was
 - Enzyme
 
 
-![project screenshot](/src/imgs/skyscanner-screenshot.png)
+![project screenshot](/src/imgs/wine-store-screenshot.png)
 
 
 Here is a link to the [live site](https://barts-wine-store.netlify.app/).
