@@ -1,6 +1,25 @@
-# Getting Started with Create React App
+# Wine Store
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Wine Store is an attempt to build a basic E-commerce website, the focus here was to get comfortable using Redux, and then to be able to write units with Jest and Enzyme.
+
+**Technologies Used:**
+
+- React Hooks
+- React Router
+- Redux
+- HTML
+- CSS
+- Semantic UI
+- Jest
+- Enzyme
+
+
+![project screenshot](/src/imgs/skyscanner-screenshot.png)
+
+
+Here is a link to the [live site](https://barts-wine-store.netlify.app/).
+
+---
 
 ## Available Scripts
 
