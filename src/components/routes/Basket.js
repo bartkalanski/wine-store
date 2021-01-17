@@ -19,7 +19,14 @@ const Basket = () => {
     return (
       <div className="ui container basket__padding">
         <div className="basket__container">
-          <BasketList items={items} />
+          <div className="basket__header">
+            <div className="basket__header-origin">Country Of Origin</div>
+            <div className="basket__header-price">Price</div>
+            <div className="basket__header-quantity">Quantity</div>
+          </div>
+          <div className="basket__list">
+            <BasketList items={items} />
+          </div>
         </div>
         <div className="total__container">
           <div className="total__price">Total to pay: {formatPrice(total)}</div>
