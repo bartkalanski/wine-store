@@ -1,6 +1,6 @@
 # Wine Store
 
-Wine Store is an attempt to build a basic E-commerce website, the focus here was to get comfortable using Redux, and then to be able to write units with Jest and Enzyme.
+Wine Store is an attempt to build a basic E-commerce website, the focus here was to get comfortable using Redux, and then to be able to write unit tests with Jest and Enzyme.
 
 **Technologies Used:**
 
